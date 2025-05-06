@@ -7,7 +7,7 @@ int main(){
 	int pontos_turisticos, pontos_turisticos2, populacao, populacao2;
 	float pib, pib2, area, area2;
 	
-	// acréscimos do nível aventureiro: //
+	// acrescimos do nivel aventureiro: //
 	// calcular densidade populacional (populacao/area), pib per capita (pib/populacao), exibir novos resultados. //
 	float densidade_populacional, densidade_populacional2, pib_per_capita, pib_per_capita2;
 	
@@ -37,7 +37,7 @@ int main(){
 	printf("Area de %s (km2): ", nome_cidade2);
 	scanf("%f", &area2);
 
-	// calculando densidade populacional (nível aventureiro) //
+	// calculando densidade populacional (nivel aventureiro) //
 	densidade_populacional = populacao/area;
 	densidade_populacional2 = populacao2/area2;
 	// ---------------------------------------------------- //
@@ -47,7 +47,7 @@ int main(){
 	printf("PIB de %s: ", nome_cidade2);
 	scanf("%f", &pib2);
 	
-	// calculando pib per capita (nível aventureiro) //
+	// calculando pib per capita (nivel aventureiro) //
 	pib_per_capita = pib/populacao;
 	pib_per_capita2 = pib2/populacao2;
 	// -------------------------------------------- //
