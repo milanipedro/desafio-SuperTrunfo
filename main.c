@@ -1,15 +1,23 @@
 #include <stdio.h>
 
-int main(){
+// Anotações de COMPARAÇÃO:
+// 1 = verdadeiro.
+// 0 = falso.
+
+int escolha_menu_inicial, escolha_menu_comparacao;
+
+unsigned long int populacao, populacao2;
+float pib, pib2, area, area2;
+int pontos_turisticos, pontos_turisticos2;
+char nome_cidade[25], nome_cidade2[25];
+
+int funcao_escolha_comparacao_cartas();
+
+int funcao_jogo_inserindo_dados() {
 	char estado, estado2;
 	char codigo_carta, codigo_carta2;
-	char nome_cidade[25], nome_cidade2[25];
-	int pontos_turisticos, pontos_turisticos2;
-	unsigned long int populacao, populacao2; // alteracao do lvl mestre - armazenar maior numero.
-	float pib, pib2, area, area2;
 
-
-	printf("Estado primeira carta (A-H): ");
+	printf("\nEstado primeira carta (A-H): ");
 	scanf(" %c", &estado);
 	printf("Estado segunda carta (A-H): ");
 	scanf(" %c", &estado2);
@@ -33,7 +41,7 @@ int main(){
 	scanf("%f", &area);
 	printf("Area de %s (km2): ", nome_cidade2);
 	scanf("%f", &area2);
-	
+
 	printf("PIB de %s: ", nome_cidade);
 	scanf("%f", &pib);
 	printf("PIB de %s: ", nome_cidade2);
@@ -43,32 +51,116 @@ int main(){
 	scanf("%i", &pontos_turisticos);
 	printf("Pontos turisticos de %s: ", nome_cidade2);
 	scanf("%i", &pontos_turisticos2);
-	
-	// acrescimos do nivel aventureiro: //
-	float densidade_populacional = populacao/area, densidade_populacional2 = populacao2/area2, pib_per_capita = pib/populacao, pib_per_capita2 = pib2/populacao2;
-	
-	// /-------------------------------------------------------\ //
-	// acrescimos do nivel mestre: //
-	float superpoder = populacao + area + pib + pontos_turisticos + pib_per_capita + (1/densidade_populacional);
-	float superpoder2 = populacao2 + area2 + pib2 + pontos_turisticos2 + pib_per_capita2 + (1/densidade_populacional2);
-	
+
+	funcao_escolha_comparacao_cartas();
+	return 0;
+}
+
+int funcao_escolha_comparacao_cartas() {
+	printf("\n\n#####|- ESCOLHA O QUE PRETENDE COMPARAR: -|#####\n");
+
+	printf("1. Populacao.\n2. Area.\n3. PIB.\n4. Pontos turisticos.\n5. Densidade demografica.\nEscolha: ");
+	scanf("%i", &escolha_menu_comparacao);
+	printf("\n");
+
+	float densidade_populacional = populacao / area;
+	float densidade_populacional2 = populacao2 / area2;
+	float pib_per_capita = pib / populacao;
+	float pib_per_capita2 = pib2 / populacao2;
+	float superpoder = populacao + area + pib + pontos_turisticos + pib_per_capita + (1 / densidade_populacional);
+	float superpoder2 = populacao2 + area2 + pib2 + pontos_turisticos2 + pib_per_capita2 + (1 / densidade_populacional2);
+
 	int resultado_populacao = populacao > populacao2;
 	int resultado_area = area > area2;
 	int resultado_pib = pib > pib2;
 	int resultado_pontos_turisticos = pontos_turisticos > pontos_turisticos2;
 	int resultado_densidade_populacional = densidade_populacional < densidade_populacional2;
-	int resultado_pib_per_capita = pib_per_capita > pib_per_capita2;
-	int resultado_super_poder = superpoder > superpoder2;
-	
-	printf("\nComparando as Cartas - SuperTrunfo:");
-	printf("\nPopulacao: %i", resultado_populacao);
-	printf("\nArea: %i", resultado_area);
-	printf("\nPIB: %i", resultado_pib);
-	printf("\nPontos turisticos: %i", resultado_pontos_turisticos);
-	printf("\nDensidade populacional: %i", resultado_densidade_populacional);
-	printf("\nPIB per capita: %i", resultado_pib_per_capita);
-	printf("\nSuper Poder: %i", resultado_super_poder);
+
+	switch (escolha_menu_comparacao) {
+	case 1:
+		if (resultado_populacao == 1) {
+			printf("A populacao de %s (%lu) > que a populacao de %s (%lu).", nome_cidade, populacao, nome_cidade2, populacao2);
+		}
+		else if (resultado_populacao == 0) {
+			printf("A populacao de %s (%lu) > que a populacao de %s (%lu).", nome_cidade2, populacao2, nome_cidade, populacao);
+		}
+		else {
+			printf("%s e %s possuem populacoes iguais (%lu).", nome_cidade, nome_cidade2, populacao);
+		}
+		break;
+	case 2:
+		if (resultado_area == 1) {
+			printf("A area de %s (%.2f) > que a area de %s (%.2f).", nome_cidade, area, nome_cidade2, area2);
+		}
+		else if (resultado_area == 0) {
+			printf("A area de %s (%.2f) > que a area de %s (%.2f).", nome_cidade2, area2, nome_cidade, area);
+		}
+		else {
+			printf("%s e %s possuem areas iguais (%.2f).", nome_cidade, nome_cidade2, area);
+		}
+		break;
+	case 3:
+		if (resultado_pib == 1) {
+			printf("O pib de %s (%.2f) > que o pib de %s (%.2f).", nome_cidade, pib, nome_cidade2, pib2);
+		}
+		else if (resultado_pib == 0) {
+			printf("O pib de %s (%.2f) > que o pib de %s (%.2f).", nome_cidade2, pib2, nome_cidade, pib);
+		}
+		else {
+			printf("%s e %s possuem PIB's iguais (%.2f).", nome_cidade, nome_cidade2, pib);
+		}
+		break;
+	case 4:
+		if (resultado_pontos_turisticos == 1) {
+			printf("Os pontos turisticos de %s (%i) > que os pontos turisticos de %s (%i).", nome_cidade, pontos_turisticos, nome_cidade2, pontos_turisticos2);
+		}
+		else if (resultado_pontos_turisticos == 0) {
+			printf("Os pontos turisticos de %s (%i) > que os pontos turisticos de %s (%i).", nome_cidade2, pontos_turisticos2, nome_cidade, pontos_turisticos);
+		}
+		else {
+			printf("%s e %s possuem pontos turisticos iguais (%i).", nome_cidade, nome_cidade2, pontos_turisticos);
+		}
+		break;
+	case 5:
+		if (resultado_densidade_populacional == 1) {
+			printf("A densidade demografica de %s (%.2f) < que a densidade demografica de %s (%.2f).", nome_cidade, densidade_populacional, nome_cidade2, densidade_populacional2);
+		}
+		else if (resultado_densidade_populacional == 0) {
+			printf("A densidade demografica de %s (%.2f) < que a densidade demografica de %s (%.2f).", nome_cidade2, densidade_populacional2, nome_cidade, densidade_populacional);
+		}
+		else {
+			printf("%s e %s possuem densidades demograficas iguais (%.2f).", nome_cidade, nome_cidade2, densidade_populacional);
+		}
+		break;
+	default:
+		printf("Escolha invalida, tente novamente mais tarde.");
+		break;
+	}
 
 	return 0;
 }
 
+int funcao_jogo_completo() {
+	printf("\n#####|- BEM-VINDO(A) AO SUPERTRUNFO! -|#####\n");
+
+	printf("\n1. Iniciar jogo.\n2. Sair do jogo.\n\nEscolha: ");
+	scanf("%i", &escolha_menu_inicial);
+
+	switch (escolha_menu_inicial) {
+	case 1:
+		funcao_jogo_inserindo_dados();
+		break;
+	case 2:
+		printf("Fechando jogo. Ate mais!");
+		break;
+	default:
+		printf("Escolha invalida, tente novamente mais tarde.");
+		break;
+	}
+	return 0;
+}
+
+int main() {
+	funcao_jogo_completo();
+	return 0;
+}
